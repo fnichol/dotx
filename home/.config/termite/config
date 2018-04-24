@@ -16,46 +16,97 @@ scroll_on_output = false
 search_wrap = true
 urgent_on_bell = true
 
-# Colors calculated with https://terminal.sexy
-# Scheme: /base16/twilight.dark
-# Url: https://terminal.sexy/#Hh4ep6enHh4ez2pMj51q-e6YdYemm4Wdr8Tbp6enX1pgz2pMj51q-e6YdYemm4Wdr8Tb____
+# Colors from khamer/base16-termite which provide base16 themes for termite
+# Scheme: base16-twilight
+# Url: https://github.com/khamer/base16-termite/blob/master/themes/base16-twilight.config
 
 [colors]
+# Base16 Twilight
+# Author: David Hart (https://github.com/hartbit)
 
-# special
-foreground      = #c5c8c6
-foreground_bold = #c5c8c6
-cursor          = #c5c8c6
-background      = #1d1f21
+foreground      = #a7a7a7
+foreground_bold = #c3c3c3
+cursor          = #c3c3c3
+background      = #1e1e1e
 
-# black
-color0  = #1d1f21
-color8  = #969896
+# 16 color space
 
-# red
-color1  = #cc6666
-color9  = #cc6666
-
-# green
-color2  = #b5bd68
-color10 = #b5bd68
-
-# yellow
-color3  = #f0c674
-color11 = #f0c674
-
-# blue
-color4  = #81a2be
-color12 = #81a2be
-
-# magenta
-color5  = #b294bb
-color13 = #b294bb
-
-# cyan
-color6  = #8abeb7
-color14 = #8abeb7
-
-# white
-color7  = #c5c8c6
+# Black, Gray, Silver, White
+color0  = #1e1e1e
+color8  = #5f5a60
+color7  = #a7a7a7
 color15 = #ffffff
+
+# Red
+color1  = #cf6a4c
+color9  = #cf6a4c
+
+# Green
+color2  = #8f9d6a
+color10 = #8f9d6a
+
+# Yellow
+color3  = #f9ee98
+color11 = #f9ee98
+
+# Blue
+color4  = #7587a6
+color12 = #7587a6
+
+# Purple
+color5  = #9b859d
+color13 = #9b859d
+
+# Teal
+color6  = #afc4db
+color14 = #afc4db
+
+# Extra colors
+color16 = #cda869
+color17 = #9b703f
+color18 = #323537
+color19 = #464b50
+color20 = #838184
+color21 = #c3c3c3
+
+
+
+#[colors]
+#
+## special
+#foreground      = #c5c8c6
+#foreground_bold = #c5c8c6
+#cursor          = #c5c8c6
+#background      = #1d1f21
+#
+## black
+#color0  = #1d1f21
+#color8  = #969896
+#
+## red
+#color1  = #cc6666
+#color9  = #cc6666
+#
+## green
+#color2  = #b5bd68
+#color10 = #b5bd68
+#
+## yellow
+#color3  = #f0c674
+#color11 = #f0c674
+#
+## blue
+#color4  = #81a2be
+#color12 = #81a2be
+#
+## magenta
+#color5  = #b294bb
+#color13 = #b294bb
+#
+## cyan
+#color6  = #8abeb7
+#color14 = #8abeb7
+#
+## white
+#color7  = #c5c8c6
+#color15 = #ffffff

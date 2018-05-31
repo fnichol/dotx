@@ -10,8 +10,5 @@ rofi.color-normal: argb:00435e75, argb:FF9dbeda, argb:00486883, argb:A02C3E4F, a
 rofi.color-active: argb:00435e75, argb:D0734375, argb:00486883, argb:A02C3E4F, argb:D0734375
 rofi.color-urgent: argb:00435e75, argb:D0b9524e, argb:00486883, argb:A02C3E4F, argb:D0b9524e
 
-
-
-
-rofi.font: MonacoB 14
+rofi.font: System San Francisco Display 14
 rofi.hide-scrollbar: true

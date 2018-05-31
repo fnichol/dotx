@@ -189,6 +189,9 @@ bindsym XF86AudioPrev exec playerctl previous
 # Next
 bindsym XF86AudioNext exec playerctl next
 
+# Lock screen
+bindsym $mod+Shift+x exec betterlockscreen --lock dim
+
 # Resize window without entering the resize mode.
 
 # Pressing y will shrink the window’s width.
@@ -236,8 +239,10 @@ bar {
 
 ## Starting External Programs
 
-# Set the background using Feh, a lightweight and powerful image viewer
-exec_always --no-startup-id feh --bg-scale ~/Pictures
+# Set the image cache to a random image using betterlockscreen
+exec --no-startup-id betterlockscreen --update ~/Pictures/Wallpapers
+# Set the background using betterlockscreen
+exec --no-startup-id betterlockscreen --wall
 
 # Compton, a compositor for X
 exec --no-startup-id compton --xrender-sync-fence

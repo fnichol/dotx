@@ -165,9 +165,9 @@ bindsym $mod+Shift+e exec "~/.config/i3/i3-exit-with-rofi.sh"
 # Backlight Control
 
 # Increase brightness
-bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessUp exec light -A 2
 # Decrease brightness
-bindsym XF86MonBrightnessDown exec light -U 5
+bindsym XF86MonBrightnessDown exec light -U 2
 
 # Volume Control
 

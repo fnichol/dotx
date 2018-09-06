@@ -242,8 +242,8 @@ bar {
 
 # Set the image cache to a random image using betterlockscreen
 exec --no-startup-id betterlockscreen --update ~/Pictures/Wallpapers
-# Set the background using betterlockscreen
-exec --no-startup-id betterlockscreen --wall
+# Set the background using nitrogen
+exec --no-startup-id nitrogen --restore
 
 # Compton, a compositor for X
 exec --no-startup-id compton --xrender-sync-fence

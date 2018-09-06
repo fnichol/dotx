@@ -251,5 +251,5 @@ exec --no-startup-id compton --xrender-sync-fence
 # Unclutter, a small program for hiding the mouse cursor
 exec --no-startup-id unclutter
 
-# Dropbox, a file sharing service
-exec --no-startup-id dropbox
+# Execute Application type DesktopEntry files
+exec --no-startup-id dex --autostart --environment i3

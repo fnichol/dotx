@@ -5,10 +5,36 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 #
 
+## Common Variable Declarations
+
 # Set the modifer key (Mod1 is Alt key, Mod 4 is Windows/Command/Super key)
 set $mod Mod1
 
+# Use `termite` as the default terminal emulator
 set $term --no-startup-id termite
+
+# Use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
+set $left h
+set $down j
+set $up k
+set $right l
+
+# Define names for default workspaces for which we configure key bindings later
+# on. We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+
+## Appearance
 
 # Setup for i3-gaps
 for_window [class="^.*"] border pixel 2
@@ -22,14 +48,7 @@ focus_follows_mouse no
 # is used in the bar {} block below.
 font pango:System San Francisco Display 10
 
-# Use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
-set $left h
-set $down j
-set $up k
-set $right l
-
-# use Mouse+$mod to drag floating windows to their wanted position
+# Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # #                       class   border  backgr. text indicator
@@ -47,14 +66,20 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
 
-# start a terminal
+
+## Program Launching
+
+# Start a terminal
 bindsym $mod+Return exec $term
 
-# kill focused window
+# Kill focused window
 bindsym $mod+Shift+q kill
 
-# start rofi (a program launcher)
+# Start rofi (a program launcher)
 bindsym $mod+space exec rofi -show run -lines 3 -bw 0 -width 100 -padding 400 -fullscreen
+
+
+## Container Management
 
 # Change focus
 bindsym $mod+$left focus left
@@ -62,7 +87,7 @@ bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
-# Alternatively, you can use the cursor keys:
+# Alternatively, you can use the cursor keys to change focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -74,7 +99,7 @@ bindsym $mod+Shift+$down move down 30
 bindsym $mod+Shift+$up move up 30
 bindsym $mod+Shift+$right move right 30
 
-# Alternatively, you can use the cursor keys:
+# Alternatively, you can use the cursor keys to move focused window
 bindsym $mod+Shift+Left move left 30
 bindsym $mod+Shift+Down move down 30
 bindsym $mod+Shift+Up move up 30
@@ -86,48 +111,37 @@ bindsym $mod+v split h
 # Split in vertical orientation
 bindsym $mod+s split v
 
-# enter fullscreen mode for the focused container
+# Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
+# Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+t layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
+# Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
+# Change focus between tiling / floating windows
 bindsym $mod+Shift+t focus mode_toggle
 
-# focus the parent container
+# Focus the parent container
 bindsym $mod+a focus parent
 
-# focus the child container
+# Focus the child container
 #bindsym $mod+d focus child
 
-# move the currently focused window to the scratchpad
+# Move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
+# Show the next scratchpad window or hide the focused scratchpad window. If
+# there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
 
+## Workspace Management
 
-# switch to workspace
+# Switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -139,7 +153,7 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
-# move focused container to workspace
+# Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
@@ -151,26 +165,32 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-# move current workspace to the primary ouput
+# Move current workspace to the primary ouput
 bindsym $mod+x move workspace to output primary
-# move current workspace to the right ouput
+# Move current workspace to the right ouput
 bindsym $mod+c move workspace to output right
 
-# reload the configuration file
+
+## i3 Control
+
+# Reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# Restart i3 in place (preserves your layout/session, can be used to upgrade
+# i3)
 bindsym $mod+Shift+r restart
-# Exit i3 (logs you out of your X session)
+# Exit i3 with a dialog (logs you out of your X session)
 bindsym $mod+Shift+e exec "~/.config/i3/i3-exit-with-rofi.sh"
 
-# Backlight Control
+
+## Screen brightness control
 
 # Increase brightness
 bindsym XF86MonBrightnessUp exec light -A 2
 # Decrease brightness
 bindsym XF86MonBrightnessDown exec light -U 2
 
-# Volume Control
+
+## Volume control
 
 # Raise volume on Master
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
@@ -179,7 +199,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%
 # Toggle mute on Master
 bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle-mute
 
-# Media Controls
+
+## Media Controls
 
 # Toggle play/pause
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -193,6 +214,9 @@ bindsym XF86AudioNext exec playerctl next
 # Lock screen
 bindsym $mod+Shift+x exec betterlockscreen --lock dim
 
+
+## Container Resizing
+
 # Resize window without entering the resize mode.
 
 # Pressing y will shrink the window’s width.
@@ -204,7 +228,7 @@ bindsym $mod+Shift+i        resize shrink height 10 px or 10 ppt
 # Pressing o will grow the window’s width.
 bindsym $mod+Shift+o        resize grow width 10 px or 10 ppt
 
-# resize window (you can also use the mouse for that)
+# Resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -217,19 +241,21 @@ mode "resize" {
         bindsym $up         resize shrink height 10 px or 10 ppt
         bindsym $right      resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
+        # Same bindings, but for the arrow keys
         bindsym Left        resize shrink width 10 px or 10 ppt
         bindsym Down        resize grow height 10 px or 10 ppt
         bindsym Up          resize shrink height 10 px or 10 ppt
         bindsym Right       resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+r
+        # Back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
 bindsym $mod+r mode "resize"
+
+
+## Status Bar
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -238,10 +264,12 @@ bar {
         status_command i3status
 }
 
+
 ## Starting External Programs
 
 # Set the image cache to a random image using betterlockscreen
 exec --no-startup-id betterlockscreen --update ~/Pictures/Wallpapers
+
 # Set the background using nitrogen
 exec --no-startup-id nitrogen --restore
 

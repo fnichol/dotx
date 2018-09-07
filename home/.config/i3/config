@@ -13,6 +13,9 @@ set $mod Mod1
 # Use `termite` as the default terminal emulator
 set $term --no-startup-id termite
 
+# Use a script for exiting, shutting down, etc.
+set $i3exit --no-startup-id ~/.config/i3/i3exit.sh
+
 # Use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
 set $left h
@@ -33,6 +36,8 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# Declare an i3 exit mode with usage inlined
+set $i3exit_mode System (c) cancel, (e) exit, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (u) shutdown
 
 ## Appearance
 
@@ -178,8 +183,23 @@ bindsym $mod+Shift+c reload
 # Restart i3 in place (preserves your layout/session, can be used to upgrade
 # i3)
 bindsym $mod+Shift+r restart
-# Exit i3 with a dialog (logs you out of your X session)
-bindsym $mod+Shift+e exec "~/.config/i3/i3-exit-with-rofi.sh"
+# Exit i3 with a dialog
+bindsym $mod+Shift+e exec $i3exit -d
+# Alternative i3 exit mode
+mode "$i3exit_mode" {
+        bindsym c mode "default"
+        bindsym e exec $i3exit exit, mode "default"
+        bindsym l exec $i3exit lock, mode "default"
+        bindsym s exec $i3exit suspend, mode "default"
+        bindsym h exec $i3exit hibernate, mode "default"
+        bindsym r exec $i3exit reboot, mode "default"
+        bindsym u exec $i3exit shutdown, mode "default"
+
+        # Alternative cancelling, returning to default
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+Delete mode "$i3exit_mode"
 
 
 ## Screen brightness control

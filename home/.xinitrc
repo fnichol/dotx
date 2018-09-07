@@ -1,6 +1,6 @@
 # Merge in Xresources
 if [ -f "$HOME/.Xresources" ]; then
-  xrdb -merge "$HOME/.Xresources"
+  xrdb -merge -I$HOME "$HOME/.Xresources"
 fi
 
 # Source all files in xinitrc.d, if present

@@ -36,6 +36,26 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+# Colors set from `$HOME/.Xresources`
+set_from_resource     $background     background
+set_from_resource     $foreground     foreground
+set_from_resource     $color0         color0
+set_from_resource     $color1         color1
+set_from_resource     $color2         color2
+set_from_resource     $color3         color3
+set_from_resource     $color4         color4
+set_from_resource     $color5         color5
+set_from_resource     $color6         color6
+set_from_resource     $color7         color7
+set_from_resource     $color8         color8
+set_from_resource     $color9         color9
+set_from_resource     $color10        color10
+set_from_resource     $color11        color11
+set_from_resource     $color12        color12
+set_from_resource     $color13        color13
+set_from_resource     $color14        color14
+set_from_resource     $color15        color15
+
 # Declare an i3 exit mode with usage inlined
 set $i3exit_mode System (c) cancel, (e) exit, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (u) shutdown
 
@@ -56,20 +76,14 @@ font pango:System San Francisco Display 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# #                       class   border  backgr. text indicator
-# client.focused          $base05 $base05 $base00 $base05
-# client.focused_inactive $base03 $base03 $base05 $base03
-# client.unfocused        $base03 $base03 $base05 $base00
-# client.urgent           $base01 $base01 $base05 $base00
-
-# class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-
-client.background       #ffffff
+# Theme colors
+# class                 border        backgr.       text          indicator child_border
+client.background       $background
+client.focused          $foreground   $background   $foreground   $color2   $color2
+client.unfocused        $foreground   $background   $foreground   $color4   $color4
+client.focused_inactive $foreground   $background   $foreground   $color4   $color4
+client.urgent           $foreground   $background   $foreground   $color4   $color4
+client.placeholder      $foreground   $background   $foreground   $color4   $color4
 
 
 ## Program Launching

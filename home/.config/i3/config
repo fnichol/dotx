@@ -64,11 +64,9 @@ set $i3exit_mode System (c) cancel, (e) exit, (l) lock, (s) suspend, (h) hiberna
 ## Appearance
 
 # Setup for i3-gaps
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 2
 gaps inner 10
 smart_borders on
-
-# hide_edge_borders both
 
 # Disable the default where mouse movements determine focus. In this setup,
 # the keyboard should win over the postion of the mouse.
@@ -82,13 +80,13 @@ font pango:System San Francisco Display 10
 floating_modifier $mod
 
 # Theme colors
-# Class                 Border        Background    Text          Indicator Child border
+# Class                 Border        Background    Text          Indicator     Child border
 client.background       $background
-client.focused          $foreground   $background   $foreground   $green    $green
-client.unfocused        $transparent  $background   $foreground   $blue     $blue
-client.focused_inactive $transparent  $background   $foreground   $blue     $blue
-client.urgent           $red          $background   $foreground   $blue     $blue
-client.placeholder      $transparent  $background   $foreground   $blue     $blue
+client.focused          $foreground   $background   $foreground   $cyan         $cyan
+client.unfocused        $transparent  $background   $foreground   $background   $background
+client.focused_inactive $transparent  $background   $foreground   $background   $background
+client.urgent           $red          $background   $foreground   $background   $background
+client.placeholder      $transparent  $background   $foreground   $background   $background
 
 
 ## Program Launching
@@ -305,6 +303,18 @@ bar {
         position top
         status_command i3status
 }
+
+
+## Specific application settings
+
+# Remove border from urxvt terminals
+for_window [class="URxvt"] border pixel 0
+# Float lxappearance application
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+# Float Zoom settings window
+for_window [class="zoom" title="Settings"] floating enable sticky enable border normal
+# Float nitrogen
+for_window [class="Nitrogen"] floating enable sticky enable border normal
 
 
 ## Starting External Programs

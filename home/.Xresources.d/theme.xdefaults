@@ -1,48 +1,54 @@
+! Color scheme based on base-16/twilight generated with oomox and tweaked with
+! terminal.sexy.
+!
+! * https://github.com/themix-project/oomox
+! * https://terminal.sexy/
+
 *fading:                  15
 *fadeColor:               black
 *cursor:                  #EAD49B
-*cursorColor:             #16A085
+*cursorColor:             #c3c3c3
 *pointerColorBackground:  #2B2C2B
 *pointerColorForeground:  #16A085
 
 ! Black
-*foreground:        #EAD49B
+*foreground:        #c3c3c3
 ! White
-*background:        #1E272B
+*background:        #323537
 
 ! (black)           Black
-*color0:            #1E272B
+*color0:            #1e1e1e
 ! (red)             Red3
-*color1:            #685742
+*color1:            #cf6a4c
 ! (green)           Green3
-*color2:            #9D6A47
+*color2:            #8f9d6a
 ! (yellow)          Yellow3
-*color3:            #B36D43
+*color3:            #cda869
 ! (blue)            Blue3
-*color4:            #78824B
+*color4:            #7587a6
 ! (magenta)         Magenta3
-*color5:            #D99F57
+*color5:            #9b859d
 ! (cyan)            Cyan3
-*color6:            #C9A554
+*color6:            #afc4db
 ! (white)           AntiqueWhite
-*color7:            #EAD49B
+*color7:            #a7a7a7
 
 ! (bright black)    Grey25
-*color8:            #666666
+*color8:            #676d74
 ! (bright red)      Red
-*color9:            #685742
+*color9:            #cf6a4c
 ! (bright green)    Green
-*color10:           #9D6A47
+*color10:           #8f9d6a
 ! (bright yellow)   Yellow
-*color11:           #B36D43
+*color11:           #f9ee98
 ! (bright blue)     Blue
-*color12:           #78824B
+*color12:           #7587a6
 ! (bright magenta)  Magenta
-*color13:           #D99F57
+*color13:           #9b859d
 ! (bright cyan)     Cyan
-*color14:           #C9A554
+*color14:           #afc4db
 ! (bright white)    White
-*color15:           #EAD49B
+*color15:           #ffffff
 
 
 !! Cursor theme
@@ -70,12 +76,12 @@ URxvt.depth:            32
 ! i.e. "[percent]", where "percent" is a decimal percentage (0-100) that
 ! specifies the opacity of the colour, where 0 is completely transparent and
 ! 100 is completely opaque.
-URxvt.background:       [90]#1E272B
+URxvt.background:       [90]#323537
 ! True: enable the scrollbar [default]. False: disable the scrollbar
 URxvt*scrollBar:        false
 ! Use the specified colour for the cursor. The default is to use the foreground
 ! colour
-URxvt*cursorColor:      #EAD49B
+URxvt*cursorColor:      #c3c3c3
 ! Save number lines in the scrollback buffer [default 1000]
 URxvt*saveLines:        4000
 ! Turn on/off ISO 14755 (default enabled). Mode by default is activated with
@@ -96,7 +102,7 @@ URxvt.url-launcher:     xdg-open
 URxvt.matcher.button:   1
 ! Used by matcher, this will color all underlined text, instead of only link
 ! matches
-URxvt.colorUL:          #4682B4
+URxvt.colorUL:          #5a6066
 URxvt.keysym.Shift-Control-C:   eval:selection_to_clipboard
 URxvt.keysym.Shift-Control-V:   eval:paste_clipboard
 
@@ -111,18 +117,18 @@ rofi.color-enabled: true
 !                   ---------------------------
 ! Color scheme
 ! window
-rofi.color-window:  #1E272B, #9D6A47, #9D6A47
+rofi.color-window:  #323537, #8f9d6a, #8f9d6a
 !                   bg       fg       bg-alt   hl-bg    hl-fg
 !                   ------------------------------------------
 ! Color schemer
 ! for normal row
-rofi.color-normal:  #1E272B, #EAD49B, #1E272B, #1E272B, #78824B
+rofi.color-normal:  #323537, #c3c3c3, #323537, #323537, #7587a6
 ! Color scheme
 ! for active row
-rofi.color-active:  #1E272B, #EAD49B, #1E272B, #1E272B, #78824B
+rofi.color-active:  #323537, #c3c3c3, #323537, #323537, #7587a6
 ! Color scheme
 ! for urgent row
-rofi.color-urgent:  #1E272B, #EAD49B, #1E272B, #1E272B, #78824B
+rofi.color-urgent:  #323537, #c3c3c3, #323537, #323537, #7587a6
 
 rofi.fake-transparency: true
 rofi.opacity:           "50"

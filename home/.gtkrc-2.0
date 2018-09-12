@@ -2,9 +2,9 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 include "/home/fnichol/.gtkrc-2.0.mine"
-gtk-theme-name="Raleigh"
-gtk-icon-theme-name="Adwaita"
-gtk-font-name="Overpass 12"
+gtk-theme-name="oomox-fnichol-base16-twilight-dark"
+gtk-icon-theme-name="oomox-fnichol-base16-twilight-dark"
+gtk-font-name="System San Francisco Display 12"
 gtk-cursor-theme-name="Adwaita"
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_BOTH

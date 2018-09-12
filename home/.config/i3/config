@@ -10,8 +10,8 @@
 # Set the modifer key (Mod1 is Alt key, Mod 4 is Windows/Command/Super key)
 set $mod Mod1
 
-# Use `termite` as the default terminal emulator
-set $term --no-startup-id termite
+# Use `urxvt` as the default terminal emulator
+set $term --no-startup-id urxvtc
 
 # Use a script for exiting, shutting down, etc.
 set $i3exit --no-startup-id ~/.config/i3/i3exit.sh
@@ -37,24 +37,26 @@ set $ws9 "9"
 set $ws10 "10"
 
 # Colors set from `$HOME/.Xresources`
-set_from_resource     $background     background
-set_from_resource     $foreground     foreground
-set_from_resource     $color0         color0
-set_from_resource     $color1         color1
-set_from_resource     $color2         color2
-set_from_resource     $color3         color3
-set_from_resource     $color4         color4
-set_from_resource     $color5         color5
-set_from_resource     $color6         color6
-set_from_resource     $color7         color7
-set_from_resource     $color8         color8
-set_from_resource     $color9         color9
-set_from_resource     $color10        color10
-set_from_resource     $color11        color11
-set_from_resource     $color12        color12
-set_from_resource     $color13        color13
-set_from_resource     $color14        color14
-set_from_resource     $color15        color15
+set_from_resource     $background     background    #000000
+set_from_resource     $foreground     foreground    #000000
+set_from_resource     $black          color0        #000000
+set_from_resource     $red            color1        #000000
+set_from_resource     $green          color2        #000000
+set_from_resource     $yellow         color3        #000000
+set_from_resource     $blue           color4        #000000
+set_from_resource     $magenta        color5        #000000
+set_from_resource     $cyan           color6        #000000
+set_from_resource     $white          color7        #000000
+set_from_resource     $brightblack    color8        #000000
+set_from_resource     $brightred      color9        #000000
+set_from_resource     $brightgreen    color10       #000000
+set_from_resource     $brightyellow   color11       #000000
+set_from_resource     $brightblue     color12       #000000
+set_from_resource     $brightmagenta  color13       #000000
+set_from_resource     $brightcyan     color14       #000000
+set_from_resource     $brightwhite    color15       #000000
+# Declare a transparent color
+set $transparent #00000000
 
 # Declare an i3 exit mode with usage inlined
 set $i3exit_mode System (c) cancel, (e) exit, (l) lock, (s) suspend, (h) hibernate, (r) reboot, (u) shutdown
@@ -62,8 +64,11 @@ set $i3exit_mode System (c) cancel, (e) exit, (l) lock, (s) suspend, (h) hiberna
 ## Appearance
 
 # Setup for i3-gaps
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 1
 gaps inner 10
+smart_borders on
+
+# hide_edge_borders both
 
 # Disable the default where mouse movements determine focus. In this setup,
 # the keyboard should win over the postion of the mouse.
@@ -77,13 +82,13 @@ font pango:System San Francisco Display 10
 floating_modifier $mod
 
 # Theme colors
-# class                 border        backgr.       text          indicator child_border
+# Class                 Border        Background    Text          Indicator Child border
 client.background       $background
-client.focused          $foreground   $background   $foreground   $color2   $color2
-client.unfocused        $foreground   $background   $foreground   $color4   $color4
-client.focused_inactive $foreground   $background   $foreground   $color4   $color4
-client.urgent           $foreground   $background   $foreground   $color4   $color4
-client.placeholder      $foreground   $background   $foreground   $color4   $color4
+client.focused          $foreground   $background   $foreground   $green    $green
+client.unfocused        $transparent  $background   $foreground   $blue     $blue
+client.focused_inactive $transparent  $background   $foreground   $blue     $blue
+client.urgent           $red          $background   $foreground   $blue     $blue
+client.placeholder      $transparent  $background   $foreground   $blue     $blue
 
 
 ## Program Launching
@@ -95,7 +100,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
 
 # Start rofi (a program launcher)
-bindsym $mod+space exec rofi -show run -lines 3 -bw 0 -width 100 -padding 400 -fullscreen
+bindsym $mod+space exec rofi -show run
 
 
 ## Container Management
@@ -248,6 +253,9 @@ bindsym XF86AudioNext exec playerctl next
 # Lock screen
 bindsym $mod+Shift+x exec betterlockscreen --lock dim
 
+# Reconfigure monitors
+bindsym $mod+F7 exec --no-startup-id autorandr --change; exec --no-startup-id nitrogen --restore
+
 
 ## Container Resizing
 
@@ -305,10 +313,10 @@ bar {
 exec --no-startup-id betterlockscreen --update ~/Pictures/Wallpapers
 
 # Set the background using nitrogen
-exec --no-startup-id nitrogen --restore
+exec_always --no-startup-id nitrogen --restore; sleep 1; compton --xrender-sync-fence --daemon --fading
 
-# Compton, a compositor for X
-exec --no-startup-id compton --xrender-sync-fence
+# urxvtd, a urxvt terminal daemon
+exec --no-startup-id urxvtd --quiet --fork --opendisplay
 
 # Unclutter, a small program for hiding the mouse cursor
 exec --no-startup-id unclutter

@@ -1,21 +1,15 @@
-#if __has_include(".Xresources.d/theme")
-#include ".Xresources.d/theme"
+#if __has_include(".Xresources.d/theme.xdefaults")
+#include ".Xresources.d/theme.xdefaults"
 #endif
 
 ! Any per-system, i.e. local customizations such as DPI, etc.
-#if __has_include(".Xresources.d/local")
-#include ".Xresources.d/local"
+#if __has_include(".Xresources.d/local.xdefaults")
+#include ".Xresources.d/local.xdefaults"
 #endif
 
-!Xft.dpi: 230
-!Xft.dpi: 192
-!Xft.dpi: 96
 Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb
 Xft.autohint: false
 Xft.hintstyle: full
 Xft.lcdfilter: lcddefault
-
-!rofi.dpi: 230
-!rofi.dpi: 192

@@ -1,0 +1,147 @@
+*fading:                  15
+*fadeColor:               black
+*cursor:                  #EAD49B
+*cursorColor:             #16A085
+*pointerColorBackground:  #2B2C2B
+*pointerColorForeground:  #16A085
+
+! Black
+*foreground:        #EAD49B
+! White
+*background:        #1E272B
+
+! (black)           Black
+*color0:            #1E272B
+! (red)             Red3
+*color1:            #685742
+! (green)           Green3
+*color2:            #9D6A47
+! (yellow)          Yellow3
+*color3:            #B36D43
+! (blue)            Blue3
+*color4:            #78824B
+! (magenta)         Magenta3
+*color5:            #D99F57
+! (cyan)            Cyan3
+*color6:            #C9A554
+! (white)           AntiqueWhite
+*color7:            #EAD49B
+
+! (bright black)    Grey25
+*color8:            #666666
+! (bright red)      Red
+*color9:            #685742
+! (bright green)    Green
+*color10:           #9D6A47
+! (bright yellow)   Yellow
+*color11:           #B36D43
+! (bright blue)     Blue
+*color12:           #78824B
+! (bright magenta)  Magenta
+*color13:           #D99F57
+! (bright cyan)     Cyan
+*color14:           #C9A554
+! (bright white)    White
+*color15:           #EAD49B
+
+
+!! Cursor theme
+
+Xcursor.theme:  Maia-Cursor
+Xcursor.size:   0
+
+
+!! urxvt
+
+! Documentation taken from `urxvt(1)` man page
+
+! Select the fonts to be used. This is a comma separated list of font names
+! that are checked in order when trying to find glyphs for characters.
+URxvt.font:             xft:Inconsolata:size=10
+! Internal border of number pixels. This resource is limited to 100
+URxvt.internalBorder:   6
+! Attempt to find a visual with the given bit depth; resource depth.
+! You probably need to specify "-depth 32", too, to force a visual with alpha
+! channels.
+URxvt.depth:            32
+! The specified colour as the windows background colour.
+!
+! You can prefix any colour with an opaqueness percentage enclosed in brackets,
+! i.e. "[percent]", where "percent" is a decimal percentage (0-100) that
+! specifies the opacity of the colour, where 0 is completely transparent and
+! 100 is completely opaque.
+URxvt.background:       [90]#1E272B
+! True: enable the scrollbar [default]. False: disable the scrollbar
+URxvt*scrollBar:        false
+! Use the specified colour for the cursor. The default is to use the foreground
+! colour
+URxvt*cursorColor:      #EAD49B
+! Save number lines in the scrollback buffer [default 1000]
+URxvt*saveLines:        4000
+! Turn on/off ISO 14755 (default enabled). Mode by default is activated with
+! Ctrl+Shift so gets activated during other keypress combinations.
+!
+! Thanks to:
+! https://blog.stigok.com/2017/08/14/disable-urxvt-iso14755-mode-yellow-box-on-ctrlshift.html
+URxvt.iso14755:         false
+! Comma-separated list(s) of perl extension scripts (default: "default") to use
+! in this terminal instance
+URxvt.perl-ext-common:  default,eval,matcher,resize-font
+! Specifies the program to be started with a URL argument. Used by the
+! "selection-popup" and "matcher" perl extensions.
+URxvt.url-launcher:     xdg-open
+! When clicked with the mouse button specified in the "matcher.button" resource
+! (default 2, or middle), the program specified in the "url-launcher" resource
+! will be started with the matched text as first argument
+URxvt.matcher.button:   1
+! Used by matcher, this will color all underlined text, instead of only link
+! matches
+URxvt.colorUL:          #4682B4
+URxvt.keysym.Shift-Control-C:   eval:selection_to_clipboard
+URxvt.keysym.Shift-Control-V:   eval:paste_clipboard
+
+
+!! rofi
+
+! Documentation taken from `rofi -dump-Xresources`
+
+! Enable the extended coloring options
+rofi.color-enabled: true
+!                   bg       border   separator
+!                   ---------------------------
+! Color scheme
+! window
+rofi.color-window:  #1E272B, #9D6A47, #9D6A47
+!                   bg       fg       bg-alt   hl-bg    hl-fg
+!                   ------------------------------------------
+! Color schemer
+! for normal row
+rofi.color-normal:  #1E272B, #EAD49B, #1E272B, #1E272B, #78824B
+! Color scheme
+! for active row
+rofi.color-active:  #1E272B, #EAD49B, #1E272B, #1E272B, #78824B
+! Color scheme
+! for urgent row
+rofi.color-urgent:  #1E272B, #EAD49B, #1E272B, #1E272B, #78824B
+
+rofi.fake-transparency: true
+rofi.opacity:           "50"
+
+! Font to use
+rofi.font:              System San Francisco Display 14
+! Separator style (none, dash, solid) *DEPRECATED*
+rofi.separator-style:   solid
+! Enable sidebar mode
+rofi.sidebar-mode:      false
+! Number of lines
+rofi.lines:             5
+! Number of columns
+rofi.columns:           1
+! Border width
+rofi.bw:                1
+! Padding
+rofi.padding:           5
+! Always show number of lines
+rofi.fixed-num-lines:   true
+! Hide scroll bar *DEPRECATED*
+rofi.hide-scrollbar:    true

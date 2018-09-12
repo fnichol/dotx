@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+set -eu
+
+dpi="$(xrdb -query | grep 'Xft\.dpi:' | awk '{print $2}')"
+
+if [ -n "$dpi" ] && [ $dpi -gt 96 ]; then
+  # Set scaling factor when running with HiDPI displays
+  #
+  # See: https://wiki.archlinux.org/index.php/HiDPI#Zoom
+  export QT_SCALE_FACTOR=2
+fi
+
+exec /usr/bin/zoom "$@"

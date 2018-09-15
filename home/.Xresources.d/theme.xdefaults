@@ -1,54 +1,79 @@
-! Color scheme based on base-16/twilight generated with oomox and tweaked with
-! terminal.sexy.
+! Color scheme based on base16-xresources/twilight
 !
+! * https://github.com/chriskempson/base16-xresources
+! * https://github.com/0xdec/base16-rofi
 ! * https://github.com/themix-project/oomox
 ! * https://terminal.sexy/
 
+#define base00 #1e1e1e
+#define base01 #323537
+#define base02 #464b50
+#define base03 #5f5a60
+#define base04 #838184
+#define base05 #a7a7a7
+#define base06 #c3c3c3
+#define base07 #ffffff
+#define base08 #cf6a4c
+#define base09 #cda869
+#define base0A #f9ee98
+#define base0B #8f9d6a
+#define base0C #afc4db
+#define base0D #7587a6
+#define base0E #9b859d
+#define base0F #9b703f
+
 *fading:                  15
-*fadeColor:               black
+*fadeColor:               base00
 *cursor:                  #EAD49B
-*cursorColor:             #c3c3c3
+*cursorColor:             base06
 *pointerColorBackground:  #2B2C2B
 *pointerColorForeground:  #16A085
 
 ! Black
-*foreground:        #c3c3c3
+*foreground:        base05
 ! White
-*background:        #323537
+*background:        base00
 
 ! (black)           Black
-*color0:            #1e1e1e
+*color0:            base00
 ! (red)             Red3
-*color1:            #cf6a4c
+*color1:            base08
 ! (green)           Green3
-*color2:            #8f9d6a
+*color2:            base0B
 ! (yellow)          Yellow3
-*color3:            #cda869
+*color3:            base0A
 ! (blue)            Blue3
-*color4:            #7587a6
+*color4:            base0D
 ! (magenta)         Magenta3
-*color5:            #9b859d
+*color5:            base0E
 ! (cyan)            Cyan3
-*color6:            #afc4db
+*color6:            base0C
 ! (white)           AntiqueWhite
-*color7:            #a7a7a7
+*color7:            base05
 
 ! (bright black)    Grey25
-*color8:            #676d74
+*color8:            base03
 ! (bright red)      Red
-*color9:            #cf6a4c
+*color9:            base08
 ! (bright green)    Green
-*color10:           #8f9d6a
+*color10:           base0B
 ! (bright yellow)   Yellow
-*color11:           #f9ee98
+*color11:           base0A
 ! (bright blue)     Blue
-*color12:           #7587a6
+*color12:           base0D
 ! (bright magenta)  Magenta
-*color13:           #9b859d
+*color13:           base0E
 ! (bright cyan)     Cyan
-*color14:           #afc4db
+*color14:           base0C
 ! (bright white)    White
-*color15:           #ffffff
+*color15:           base07
+
+*color16:           base09
+*color17:           base0F
+*color18:           base01
+*color19:           base02
+*color20:           base04
+*color21:           base06
 
 
 !! Cursor theme
@@ -76,12 +101,12 @@ URxvt.depth:            32
 ! i.e. "[percent]", where "percent" is a decimal percentage (0-100) that
 ! specifies the opacity of the colour, where 0 is completely transparent and
 ! 100 is completely opaque.
-URxvt.background:       [90]#323537
+URxvt.background:       [90]base00
 ! True: enable the scrollbar [default]. False: disable the scrollbar
 URxvt*scrollBar:        false
 ! Use the specified colour for the cursor. The default is to use the foreground
 ! colour
-URxvt*cursorColor:      #c3c3c3
+URxvt*cursorColor:      base06
 ! Save number lines in the scrollback buffer [default 1000]
 URxvt*saveLines:        4000
 ! Turn on/off ISO 14755 (default enabled). Mode by default is activated with
@@ -102,7 +127,7 @@ URxvt.url-launcher:     xdg-open
 URxvt.matcher.button:   1
 ! Used by matcher, this will color all underlined text, instead of only link
 ! matches
-URxvt.colorUL:          #5a6066
+URxvt.colorUL:          base06
 URxvt.keysym.Shift-Control-C:   eval:selection_to_clipboard
 URxvt.keysym.Shift-Control-V:   eval:paste_clipboard
 
@@ -113,28 +138,28 @@ URxvt.keysym.Shift-Control-V:   eval:paste_clipboard
 
 ! Enable the extended coloring options
 rofi.color-enabled: true
-!                   bg       border   separator
-!                   ---------------------------
+!                   bg        border    separator
+!                   ----------------------------
 ! Color scheme
 ! window
-rofi.color-window:  #323537, #8f9d6a, #8f9d6a
-!                   bg       fg       bg-alt   hl-bg    hl-fg
-!                   ------------------------------------------
+rofi.color-window:  base01,   base01,   base00
+!                   bg        fg        bg-alt    hl-bg     hl-fg
+!                   ---------------------------------------------
 ! Color schemer
 ! for normal row
-rofi.color-normal:  #323537, #c3c3c3, #323537, #323537, #7587a6
+rofi.color-normal:  base01,   base05,   base01,   base01,   base07
 ! Color scheme
 ! for active row
-rofi.color-active:  #323537, #c3c3c3, #323537, #323537, #7587a6
+rofi.color-active:  base01,   base0D,   base01,   base01,   base0D
 ! Color scheme
 ! for urgent row
-rofi.color-urgent:  #323537, #c3c3c3, #323537, #323537, #7587a6
+rofi.color-urgent:  base01,   base08,   base01,   base01,   base08
 
 rofi.fake-transparency: true
-rofi.opacity:           "50"
+rofi.opacity:           "10"
 
 ! Font to use
-rofi.font:              System San Francisco Display 14
+rofi.font:              System San Francisco Display 18
 ! Separator style (none, dash, solid) *DEPRECATED*
 rofi.separator-style:   solid
 ! Enable sidebar mode

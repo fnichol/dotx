@@ -10,8 +10,8 @@
 # Set the modifer key (Mod1 is Alt key, Mod 4 is Windows/Command/Super key)
 set $mod Mod1
 
-# Use `urxvt` as the default terminal emulator
-set $term --no-startup-id urxvtc
+# Use `alacritty` as the default terminal emulator
+set $term --no-startup-id alacritty
 
 # Use a script for exiting, shutting down, etc.
 set $i3exit --no-startup-id ~/.config/i3/i3exit.sh

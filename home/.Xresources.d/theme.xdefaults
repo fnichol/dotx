@@ -82,56 +82,6 @@ Xcursor.theme:  Maia-Cursor
 Xcursor.size:   0
 
 
-!! urxvt
-
-! Documentation taken from `urxvt(1)` man page
-
-! Select the fonts to be used. This is a comma separated list of font names
-! that are checked in order when trying to find glyphs for characters.
-URxvt.font:             xft:Inconsolata:size=10
-! Internal border of number pixels. This resource is limited to 100
-URxvt.internalBorder:   6
-! Attempt to find a visual with the given bit depth; resource depth.
-! You probably need to specify "-depth 32", too, to force a visual with alpha
-! channels.
-URxvt.depth:            32
-! The specified colour as the windows background colour.
-!
-! You can prefix any colour with an opaqueness percentage enclosed in brackets,
-! i.e. "[percent]", where "percent" is a decimal percentage (0-100) that
-! specifies the opacity of the colour, where 0 is completely transparent and
-! 100 is completely opaque.
-URxvt.background:       [90]base00
-! True: enable the scrollbar [default]. False: disable the scrollbar
-URxvt*scrollBar:        false
-! Use the specified colour for the cursor. The default is to use the foreground
-! colour
-URxvt*cursorColor:      base06
-! Save number lines in the scrollback buffer [default 1000]
-URxvt*saveLines:        4000
-! Turn on/off ISO 14755 (default enabled). Mode by default is activated with
-! Ctrl+Shift so gets activated during other keypress combinations.
-!
-! Thanks to:
-! https://blog.stigok.com/2017/08/14/disable-urxvt-iso14755-mode-yellow-box-on-ctrlshift.html
-URxvt.iso14755:         false
-! Comma-separated list(s) of perl extension scripts (default: "default") to use
-! in this terminal instance
-URxvt.perl-ext-common:  default,eval,matcher,resize-font
-! Specifies the program to be started with a URL argument. Used by the
-! "selection-popup" and "matcher" perl extensions.
-URxvt.url-launcher:     xdg-open
-! When clicked with the mouse button specified in the "matcher.button" resource
-! (default 2, or middle), the program specified in the "url-launcher" resource
-! will be started with the matched text as first argument
-URxvt.matcher.button:   1
-! Used by matcher, this will color all underlined text, instead of only link
-! matches
-URxvt.colorUL:          base06
-URxvt.keysym.Shift-Control-C:   eval:selection_to_clipboard
-URxvt.keysym.Shift-Control-V:   eval:paste_clipboard
-
-
 !! rofi
 
 ! Documentation taken from `rofi -dump-Xresources`

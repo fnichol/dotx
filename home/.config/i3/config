@@ -326,6 +326,8 @@ bar {
 
 # Remove border from urxvt terminals
 for_window [class="URxvt"] border pixel 0
+# Remove border from alacritty terminals
+for_window [class="Alacritty"] border pixel 0
 # Float lxappearance application
 for_window [class="Lxappearance"] floating enable sticky enable border normal
 # Float Zoom settings window

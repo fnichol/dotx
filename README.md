@@ -10,6 +10,17 @@ A personal set of X Windows/Wayland configuration for various programs.
 
 <!-- toc -->
 
+- [Installation](#installation)
+  * [Workstation](#workstation)
+  * [homeshick](#homeshick)
+  * [Homesick](#homesick)
+- [Issues](#issues)
+- [Contributing](#contributing)
+- [Authors](#authors)
+- [License](#license)
+
+<!-- tocstop -->
+
 ## Installation
 
 ### Workstation

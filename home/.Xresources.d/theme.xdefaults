@@ -109,7 +109,7 @@ rofi.fake-transparency: true
 rofi.opacity:           "10"
 
 ! Font to use
-rofi.font:              System San Francisco Display 18
+rofi.font:              System San Francisco Display 24
 ! Separator style (none, dash, solid) *DEPRECATED*
 rofi.separator-style:   solid
 ! Enable sidebar mode

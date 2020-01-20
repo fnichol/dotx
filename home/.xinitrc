@@ -20,5 +20,14 @@ if [ "$(cat /sys/class/dmi/id/product_name)" = "XPS 13 9370" ]; then
   xinput set-prop "$touchpad" "libinput Natural Scrolling Enabled" 1
 fi
 
+if [ "$(cat /sys/class/dmi/id/sys_vendor)" = "VMware, Inc." ]; then
+  xrandr --auto
+
+  # TODO: this currently works for the LG 34GK950F-B display running in full
+  # screen, but this needs to be variable based on the display size/density and
+  # whether or not it's running virtualized.
+  "$HOME/bin/set-dpi" 219
+fi
+
 xset r rate 200 30
 exec i3

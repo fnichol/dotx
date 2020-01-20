@@ -7,7 +7,7 @@ print_usage() {
 
   echo "$program $version
 
-    Poops
+    Sets given DPI for the current Xorg session
 
     USAGE:
         $program [FLAGS] <DPI>

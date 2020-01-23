@@ -1,58 +1,104 @@
 #!/usr/bin/env sh
+# shellcheck disable=SC2039
+
+print_usage() {
+  local program="$1"
+  local version="$2"
+  local author="$3"
+
+  echo "$program $version
+
+    i3 workstation power and exiting.
+
+    USAGE:
+        $program [FLAGS] [<ACTION>]
+
+    FLAGS:
+        -d, --dialog    Displays a graphical dialog
+        -h, --help      Prints this message
+        -V, --version   Prints version information
+
+    ARGS:
+        <ACTION>    One of {cancel|exit|lock|suspend|hibernate|reboot|shutdown}
+
+    AUTHOR:
+        $author
+    " | sed 's/^ \{1,4\}//g'
+}
 
 main() {
   set -eu
   if [ -n "${DEBUG:-}" ]; then set -x; fi
+  if [ -n "${TRACE:-}" ]; then set -xv; fi
 
-  _program="$(basename "$0")"
-  _version="0.5.0"
-  _author="Fletcher Nichol <fnichol@nichol.ca>"
+  local program version author
+  program="$(basename "$0")"
+  version="0.5.0"
+  author="Fletcher Nichol <fnichol@nichol.ca>"
 
-  parse_cli_args "$@"
+  # Parse CLI arguments and set local variables
+  parse_cli_args "$program" "$version" "$author" "$@"
+  local action="${ACTION:-}"
+  local use_dialog="${USE_DIALOG:-}"
+  unset ACTION USE_DIALOG
 
-  if [ -n "${_use_dialog:-}" ]; then
+  if [ -n "$use_dialog" ]; then
     show_dialog
   else
-    run_action "$_action"
+    run_action "$action"
   fi
 }
 
-print_help() {
-  cat <<HELP
-$_program $_version
-
-$_author
-
-i3 workstation power and exiting.
-
-USAGE:
-        $_program [FLAGS] [<ACTION>]
-
-FLAGS:
-    -h  Prints this message
-    -d  Display a graphical dialog
-
-ARGS:
-    <ACTION>    One of {cancel|exit|lock|suspend|hibernate|reboot|shutdown}
-
-HELP
-}
-
 parse_cli_args() {
+  local program version author
+  program="$1"
+  shift
+  version="$1"
+  shift
+  author="$1"
+  shift
+
   OPTIND=1
   # Parse command line flags and options
-  while getopts ":hd" opt; do
+  while getopts ":hdV-:" opt; do
     case $opt in
+      d)
+        USE_DIALOG=true
+        ;;
       h)
-        print_help
+        print_usage "$program" "$version" "$author"
         exit 0
         ;;
-      d)
-        _use_dialog=true
+      V)
+        print_version "$program" "$version"
+        exit 0
+        ;;
+      -)
+        case "$OPTARG" in
+          dialog)
+            USE_DIALOG=true
+            ;;
+          help)
+            print_usage "$program" "$version" "$author"
+            exit 0
+            ;;
+          version)
+            print_version "$program" "$version" "true"
+            exit 0
+            ;;
+          '')
+            # "--" terminates argument processing
+            break
+            ;;
+          *)
+            print_usage "$program" "$version" "$author" >&2
+            die "invalid argument --$OPTARG"
+            ;;
+        esac
         ;;
       \?)
-        print_help
-        exit_with "Invalid option:  -$OPTARG" 1
+        print_usage "$program" "$version" "$author" >&2
+        die "invalid option: -$OPTARG"
         ;;
     esac
   done
@@ -60,34 +106,16 @@ parse_cli_args() {
   shift "$((OPTIND - 1))"
 
   if [ -n "${1:-}" ]; then
-    _action="$1"
+    ACTION="$1"
   fi
 
-  if [ -n "${_action:-}" ] && [ -n "${_use_dialog:-}" ]; then
-    print_help
-    exit_with "Cannot provide action and use dialog" 2
+  if [ -n "${ACTION:-}" ] && [ -n "${USE_DIALOG:-}" ]; then
+    print_usage "$program" "$version" "$author" >&2
+    die "cannot provide action and use dialog"
   fi
-  if [ -z "${_action:-}" ] && [ -z "${_use_dialog:-}" ]; then
-    print_help
-    exit_with "Must provide either action or use dialog" 2
-  fi
-}
-
-exit_with() {
-  case "${TERM:-}" in
-    *term | xterm-* | rxvt | screen | screen-*)
-      printf -- "\n\033[1;31mERROR: \033[1;37m${1:-}\033[0m\n\n" >&2
-      ;;
-    *)
-      printf -- "\nERROR: ${1:-}\n\n" >&2
-      ;;
-  esac
-  exit "${2:-10}"
-}
-
-need_cmd() {
-  if ! command -v "$1" >/dev/null 2>&1; then
-    exit_with "Required command '$1' not found on PATH" 127
+  if [ -z "${ACTION:-}" ] && [ -z "${USE_DIALOG:-}" ]; then
+    print_usage "$program" "$version" "$author" >&2
+    die "must provide either action or use dialog"
   fi
 }
 
@@ -155,10 +183,52 @@ run_action() {
       systemctl poweroff --ignore-inhibitors
       ;;
     *)
-      print_help
-      exit_with "Invalid action: $action" 3
+      print_usage
+      die "invalid action: $action"
       ;;
   esac
+}
+
+check_cmd() {
+  local _cmd
+  _cmd="$1"
+
+  if ! command -v "$_cmd" >/dev/null 2>&1; then
+    unset _cmd
+    return 1
+  else
+    unset _cmd
+    return 0
+  fi
+}
+
+die() {
+  local _msg
+  _msg="$1"
+
+  case "${TERM:-}" in
+    *term | xterm-* | rxvt | screen | screen-*)
+      printf -- "\n\033[1;31;40mxxx \033[1;37;40m%s\033[0m\n\n" "$_msg" >&2
+      ;;
+    *)
+      printf -- "\nxxx %s\n\n" "$_msg" >&2
+      ;;
+  esac
+
+  unset _msg
+  exit 1
+}
+
+need_cmd() {
+  local _cmd
+  _cmd="$1"
+
+  if ! check_cmd "$_cmd"; then
+    die "Required command '$_cmd' not found on PATH"
+  fi
+
+  unset _cmd
+  return 0
 }
 
 main "$@" || exit 99

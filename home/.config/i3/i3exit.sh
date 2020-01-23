@@ -18,7 +18,7 @@ main() {
 }
 
 print_help() {
-  cat<<HELP
+  cat <<HELP
 $_program $_version
 
 $_author
@@ -86,7 +86,7 @@ exit_with() {
 }
 
 need_cmd() {
-  if ! command -v "$1" > /dev/null 2>&1; then
+  if ! command -v "$1" >/dev/null 2>&1; then
     exit_with "Required command '$1' not found on PATH" 127
   fi
 }
@@ -144,7 +144,7 @@ run_action() {
       i3lock
       systemctl hibernate
       ;;
-   reboot)
+    reboot)
       need_cmd systemctl
 
       systemctl reboot

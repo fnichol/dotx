@@ -101,8 +101,8 @@ bindsym $mod+Return exec $term
 # Kill focused window
 bindsym $mod+Shift+q kill
 
-# Start rofi (a program launcher)
-bindsym $mod+space exec rofi -show run
+# Start a program launcher
+bindsym $mod+space exec bemenu-run
 
 
 ## Container Management

@@ -131,14 +131,22 @@ Hibernate
 Reboot
 Shutdown"
 
-  need_cmd rofi
   need_cmd tr
   need_cmd wc
 
   lines=$(echo "$options" | wc -l)
-  action="$(echo "$options" | rofi -i -dmenu -lines "$lines" -mesg "$message")"
+  action="$(echo "$options" | dialog "$lines" -mesg "$message")"
 
   run_action "$(echo "$action" | tr '[:upper:]' '[:lower:]')"
+}
+
+dialog() {
+  local lines="$1"
+  local message="$2"
+
+  need_cmd bemenu
+
+  bemenu --ignorecase --list "$lines" --prompt "$message"
 }
 
 run_action() {

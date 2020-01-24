@@ -14,7 +14,10 @@ set $mod Mod1
 set $term --no-startup-id alacritty
 
 # Use a script for exiting, shutting down, etc.
-set $i3exit --no-startup-id ~/.config/i3/i3-exit.sh
+set $i3exit --no-startup-id alacritty -t 'fzf Dialog' -e ~/.config/i3/i3-exit.sh
+
+# Use a script for launching programs
+set $i3launcher  --no-startup-id alacritty -t 'fzf Dialog' -e ~/.config/i3/i3-launcher.sh
 
 # Use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
@@ -102,7 +105,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
 
 # Start a program launcher
-bindsym $mod+space exec bemenu-run
+bindsym $mod+space exec $i3launcher
 
 
 ## Container Management
@@ -334,6 +337,8 @@ for_window [class="Lxappearance"] floating enable sticky enable border normal
 for_window [class="zoom" title="Settings"] floating enable sticky enable border normal
 # Float nitrogen
 for_window [class="Nitrogen"] floating enable sticky enable border normal
+# Float fzf selection dialogs
+for_window [title="fzf Dialog"] floating enable sticky enable border pixel 0
 
 
 ## Starting External Programs

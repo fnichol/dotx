@@ -8,18 +8,14 @@ print_usage() {
 
   echo "$program $version
 
-    i3 workstation power and exiting.
+    i3 program launcher
 
     USAGE:
         $program [FLAGS] [<ACTION>]
 
     FLAGS:
-        -d, --dialog    Displays a graphical dialog
         -h, --help      Prints this message
         -V, --version   Prints version information
-
-    ARGS:
-        <ACTION>    One of {cancel|exit|lock|suspend|hibernate|reboot|shutdown}
 
     AUTHOR:
         $author
@@ -38,15 +34,14 @@ main() {
 
   # Parse CLI arguments and set local variables
   parse_cli_args "$program" "$version" "$author" "$@"
-  local action="${ACTION:-}"
-  local use_dialog="${USE_DIALOG:-}"
-  unset ACTION USE_DIALOG
 
-  if [ -n "$use_dialog" ]; then
-    show_dialog
-  else
-    run_action "$action"
-  fi
+  need_cmd compgen
+  need_cmd fzf
+  need_cmd i3-msg
+  need_cmd sort
+  need_cmd xargs
+
+  show_dialog
 }
 
 parse_cli_args() {
@@ -60,11 +55,8 @@ parse_cli_args() {
 
   OPTIND=1
   # Parse command line flags and options
-  while getopts ":hdV-:" opt; do
+  while getopts ":hV-:" opt; do
     case $opt in
-      d)
-        USE_DIALOG=true
-        ;;
       h)
         print_usage "$program" "$version" "$author"
         exit 0
@@ -75,9 +67,6 @@ parse_cli_args() {
         ;;
       -)
         case "$OPTARG" in
-          dialog)
-            USE_DIALOG=true
-            ;;
           help)
             print_usage "$program" "$version" "$author"
             exit 0
@@ -104,97 +93,13 @@ parse_cli_args() {
   done
   # Shift off all parsed token in `$*` so that the subcommand is now `$1`.
   shift "$((OPTIND - 1))"
-
-  if [ -n "${1:-}" ]; then
-    ACTION="$1"
-  fi
-
-  if [ -n "${ACTION:-}" ] && [ -n "${USE_DIALOG:-}" ]; then
-    print_usage "$program" "$version" "$author" >&2
-    die "cannot provide action and use dialog"
-  fi
-  if [ -z "${ACTION:-}" ] && [ -z "${USE_DIALOG:-}" ]; then
-    print_usage "$program" "$version" "$author" >&2
-    die "must provide either action or use dialog"
-  fi
 }
 
 show_dialog() {
-  local lines action
-  local message='i3 Exit'
-  local options="\
-Cancel
-Exit
-Lock
-Suspend
-Hibernate
-Reboot
-Shutdown"
-
-  need_cmd tr
-  need_cmd wc
-
-  lines=$(echo "$options" | wc -l)
-  action="$(echo "$options" | dialog "$lines" "$message")"
-
-  run_action "$(echo "$action" | tr '[:upper:]' '[:lower:]')"
-}
-
-dialog() {
-  local lines="$1"
-  local message="$2"
-
-  need_cmd fzf
-
-  fzf --no-extended --layout=reverse --margin=33%,33% --prompt="$message: "
-}
-
-run_action() {
-  local action="$1"
-
-  case "$action" in
-    cancel)
-      # Nothing to do!
-      ;;
-    exit)
-      need_cmd i3-msg
-
-      i3-msg exit
-      ;;
-    lock)
-      need_cmd i3lock
-
-      i3lock
-      ;;
-    suspend)
-      need_cmd i3lock
-      need_cmd systemctl
-
-      i3lock
-      systemctl suspend
-      ;;
-    hibernate)
-      need_cmd i3lock
-      need_cmd systemctl
-
-      i3lock
-      systemctl hibernate
-      ;;
-    reboot)
-      need_cmd systemctl
-
-      systemctl reboot
-      ;;
-    shutdown)
-      need_cmd systemctl
-
-      systemctl poweroff --ignore-inhibitors
-      ;;
-    *)
-      print_usage
-      die "invalid action: $action"
-      ;;
-  esac
+  compgen -c \
+    | sort -u \
+    | fzf --no-extended --layout=reverse --margin=33%,25% --prompt="Launch: " \
+    | xargs -I"{}" i3-msg "exec --no-startup-id {}"
 }
 
 check_cmd() {

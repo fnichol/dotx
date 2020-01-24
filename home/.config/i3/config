@@ -14,7 +14,7 @@ set $mod Mod1
 set $term --no-startup-id alacritty
 
 # Use a script for exiting, shutting down, etc.
-set $i3exit --no-startup-id ~/.config/i3/i3exit.sh
+set $i3exit --no-startup-id ~/.config/i3/i3-exit.sh
 
 # Use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient

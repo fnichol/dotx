@@ -75,9 +75,8 @@ for_window [class="^.*"] border pixel 2
 gaps inner 10
 smart_borders on
 
-# Disable the default where mouse movements determine focus. In this setup,
-# the keyboard should win over the postion of the mouse.
-focus_follows_mouse no
+# Enable the default where mouse movements determine focus
+focus_follows_mouse yes
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.

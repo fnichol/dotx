@@ -278,6 +278,8 @@ bindsym $mod+Shift+o        resize grow width 10 px or 10 ppt
 bindsym $mod+Control+1      resize set width 33 ppt
 # Set the width of the current window to 66%
 bindsym $mod+Control+2      resize set width 66 ppt
+# Set the width of the current window to 50%
+bindsym $mod+Control+5      resize set width 50 ppt
 
 # Resize window (you can also use the mouse for that)
 mode "resize" {
@@ -302,6 +304,8 @@ mode "resize" {
         bindsym 1           resize set width 33 ppt
         # Set the width of the current window to 66%
         bindsym 2           resize set width 66 ppt
+        # Set the width of the current window to 50%
+        bindsym 5           resize set width 50 ppt
 
         # Back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"

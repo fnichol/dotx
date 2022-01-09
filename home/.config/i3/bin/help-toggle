@@ -1,0 +1,26 @@
+#!/bin/sh
+# shellcheck disable=SC3043
+
+main() {
+  set -eu
+  if [ -n "${DEBUG:-}" ]; then set -v; fi
+  if [ -n "${TRACE:-}" ]; then set -xv; fi
+
+  # shellcheck source=home/.config/i3/vendor/lib/libsh.minimal-minified.sh
+  . "${0%/*}/../vendor/lib/libsh.minimal-minified.sh"
+
+  need_cmd kill
+  need_cmd pidof
+  need_cmd remontoire
+
+  local pid
+  pid="$(pidof remontoire || true)"
+
+  if [ -z "$pid" ]; then
+    remontoire -c "$HOME/.config/i3/config" &
+  else
+    kill "$pid"
+  fi
+}
+
+main "$@" || exit 99

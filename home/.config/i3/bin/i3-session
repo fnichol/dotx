@@ -1,0 +1,179 @@
+#!/bin/sh
+# shellcheck disable=SC3043
+
+print_usage() {
+  local program="$1"
+  local version="$2"
+  local author="$3"
+
+  cat <<-EOF
+	$program $version
+
+        i3 session management.
+
+	USAGE:
+	    $program [FLAGS] [<ACTION>]
+
+	FLAGS:
+	    -h, --help      Prints this message
+	    -V, --version   Prints version information
+
+	ARGS:
+	    <ACTION>        Action to perform
+	                    [values: logout, poweroff, reboot, lock-screen]
+
+	AUTHOR:
+	    $author
+
+	EOF
+}
+
+main() {
+  set -eu
+  if [ -n "${DEBUG:-}" ]; then set -v; fi
+  if [ -n "${TRACE:-}" ]; then set -xv; fi
+
+  # shellcheck source=home/.config/i3/vendor/lib/libsh.minimal-minified.sh
+  . "${0%/*}/../vendor/lib/libsh.minimal-minified.sh"
+
+  local program version author
+  program="$(basename "$0")"
+  version="0.5.0"
+  author="Fletcher Nichol <fnichol@nichol.ca>"
+
+  # Parse CLI arguments and set local variables
+  parse_cli_args "$program" "$version" "$author" "$@"
+  local action="${ACTION:-}"
+  unset ACTION
+
+  need_cmd zenity
+
+  case "$action" in
+    logout)
+      action_logout
+      ;;
+    poweroff)
+      action_poweroff
+      ;;
+    reboot)
+      action_reboot
+      ;;
+    *)
+      die "unsupported action: $action"
+      ;;
+  esac
+}
+
+action_logout() {
+  need_cmd awk
+  need_cmd getent
+  need_cmd i3-msg
+  need_cmd id
+
+  local name
+  name="$(getent passwd "$(id -u)" | awk -F: '{ print $5 }')"
+
+  zenity \
+    --question \
+    --no-wrap \
+    --timeout 60 \
+    --text "$name will be logged out automatically in 60 seconds." \
+    --ok-label "Log Out" \
+    --cancel-label "Cancel" \
+    || exit 0
+  i3-msg exit
+}
+
+action_poweroff() {
+  need_cmd systemctl
+
+  zenity \
+    --question \
+    --no-wrap \
+    --timeout 60 \
+    --text "The system will power off automatically in 60 seconds." \
+    --ok-label "Power Off" \
+    --cancel-label "Cancel" \
+    || exit 0
+  systemctl poweroff
+}
+
+action_reboot() {
+  need_cmd systemctl
+
+  zenity \
+    --question \
+    --no-wrap \
+    --timeout 60 \
+    --text "The system will restart automatically in 60 seconds." \
+    --ok-label "Restart" \
+    --cancel-label "Cancel" \
+    || exit 0
+  systemctl reboot
+}
+
+parse_cli_args() {
+  local program version author
+  program="$1"
+  shift
+  version="$1"
+  shift
+  author="$1"
+  shift
+
+  OPTIND=1
+  # Parse command line flags and options
+  while getopts ":hV-:" opt; do
+    case $opt in
+      h)
+        print_usage "$program" "$version" "$author"
+        exit 0
+        ;;
+      V)
+        print_version "$program" "$version"
+        exit 0
+        ;;
+      -)
+        case "$OPTARG" in
+          help)
+            print_usage "$program" "$version" "$author"
+            exit 0
+            ;;
+          version)
+            print_version "$program" "$version"
+            exit 0
+            ;;
+          '')
+            # "--" terminates argument processing
+            break
+            ;;
+          *)
+            print_usage "$program" "$version" "$author" >&2
+            die "invalid argument --$OPTARG"
+            ;;
+        esac
+        ;;
+      \?)
+        print_usage "$program" "$version" "$author" >&2
+        die "invalid option: -$OPTARG"
+        ;;
+    esac
+  done
+  # Shift off all parsed token in `$*` so that the subcommand is now `$1`.
+  shift "$((OPTIND - 1))"
+
+  if [ -z "${1:-}" ]; then
+    print_usage "$program" "$version" "$author" >&2
+    die "missing required ACTION argument"
+  fi
+  ACTION="$1"
+}
+
+print_version() {
+  local program="$1"
+  local version="$2"
+
+  echo "$program $version"
+}
+
+main "$@" || exit 99

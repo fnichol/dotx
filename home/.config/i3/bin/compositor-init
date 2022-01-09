@@ -1,0 +1,28 @@
+#!/bin/sh
+# shellcheck disable=SC3043
+
+main() {
+  set -eu
+  if [ -n "${DEBUG:-}" ]; then set -v; fi
+  if [ -n "${TRACE:-}" ]; then set -xv; fi
+
+  # shellcheck source=home/.config/i3/vendor/lib/libsh.minimal-minified.sh
+  . "${0%/*}/../vendor/lib/libsh.minimal-minified.sh"
+
+  need_cmd kill
+  need_cmd picom
+  need_cmd pidof
+
+  local pid
+  pid="$(pidof picom || true)"
+
+  while [ -n "$pid" ]; do
+    kill "$pid"
+    sleep .1
+    pid="$(pidof picom || true)"
+  done
+
+  picom --config "$HOME/.config/picom/picom.conf"
+}
+
+main "$@" || exit 99

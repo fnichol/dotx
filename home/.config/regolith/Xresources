@@ -1,0 +1,8 @@
+! terminal to launch by default
+i3-wm.program.terminal.app: /usr/bin/alacritty
+
+# set bar position to top
+i3-wm.bar.position: top
+
+! window focus follows your mouse movements as the mouse crosses window borders
+i3-wm.gaps.focus_follows_mouse: yes

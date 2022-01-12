@@ -93,7 +93,8 @@ set_from_resource $ws10_key i3-wm.workspace.10.key 0
 
 ## Launch // Terminal // <> Enter ##
 set_from_resource $i3-wm.binding.terminal i3-wm.binding.terminal Return
-bindsym $mod+$i3-wm.binding.terminal exec alacritty
+set_from_resource $i3-wm.program.terminal.app i3-wm.program.terminal.app alacritty
+bindsym $mod+$i3-wm.binding.terminal exec $i3-wm.program.terminal.app
 
 ## Launch // Browser // <><Shift> Enter ##
 set_from_resource $i3-wm.binding.browser i3-wm.binding.browser Shift+Return

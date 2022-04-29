@@ -1,7 +1,8 @@
-! terminal to launch by default
-i3-wm.program.terminal.app: /usr/bin/alacritty
+! override the default terminal launching binding so we can re-use the `Return`
+! binding in `~/.config/regolith/i3/config.d/00_terminal_launcher`
+i3-wm.binding.terminal: Ctrl+Shift+Return
 
-# set bar position to top
+! set bar position to top
 i3-wm.bar.position: top
 
 ! window focus follows your mouse movements as the mouse crosses window borders

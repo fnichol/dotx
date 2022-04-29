@@ -1,0 +1,9 @@
+# Override default terminal program choice
+
+# Note that we are not using `$i3-wm.binding.terminal` because that keybinding
+# has already been registered in the main config file. In
+# `~/.config/regolith/Xresources` we override the value for
+# `$i3-wm.binding.terminal` to free up its default value `Return`, so we can
+# use it later, here. It's sneaky but unless and until there is an upstream
+# `$i3-vm.program.launcher.app` variable, then this will work as a work around.
+bindsym $mod+Return exec alacritty

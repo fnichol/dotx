@@ -1,6 +1,8 @@
 # Manage zoom application window floating
 #
-# Reference: https://www.reddit.com/r/i3wm/comments/m27dwc/comment/hsi1l0m
+# References:
+# - https://www.reddit.com/r/i3wm/comments/m27dwc/comment/hsi1l0m
+# - https://bewilderedoctothorpe.net/2022/03/30/i3wm-zoom-screen-sharing/
 
 # Float all zoom application windows by default
 for_window [class="zoom"] floating enable
@@ -10,3 +12,11 @@ for_window [class="zoom" title="Zoom - Licensed Account"] floating disable
 
 # Disable default floating for zoom meeting windows
 for_window [class="zoom" title="Zoom Meeting"] floating disable
+
+# Set zoom notification window to floating with no focus
+for_window [title="^zoom\s?$"] floating enable
+no_focus [title="^zoom\s?$"]
+
+# Set zoom notification window to floating with no focus
+for_window [title="^join\?.*action=join.*$"] floating enable
+no_focus [title="^join\?.*action=join.*$"]

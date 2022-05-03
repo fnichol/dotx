@@ -1,0 +1,8 @@
+# Dunst
+#
+# Displays notifications
+[dunst]
+command=$HOME/.config/regolith/i3xrocks/dunst
+markup=pango
+interval=10
+format=json

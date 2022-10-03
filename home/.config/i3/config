@@ -478,6 +478,13 @@ set_from_resource $i3-wm.window.border.size i3-wm.window.border.size 1
 set_from_resource $i3-wm.floatingwindow.border.size i3-wm.floatingwindow.border.size 1
 default_border pixel $i3-wm.window.border.size
 default_floating_border pixel $i3-wm.floatingwindow.border.size
+#
+# Pending release of i3 post-4.21 which incorporates
+# https://github.com/i3/i3/pull/5158
+#
+# See: https://github.com/i3/i3/issues/5149
+#
+for_window [all] border pixel $i3-wm.window.border.size
 
 # Specify the distance between windows in pixels. (i3-gaps)
 set_from_resource $i3-wm.gaps.inner.size i3-wm.gaps.inner.size 5

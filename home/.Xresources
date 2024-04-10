@@ -7,6 +7,12 @@
 #include ".Xresources.d/local.xdefaults"
 #endif
 
+! If a regolith Xresources config exists, load it to share setup with vanilla
+! i3 configuration
+#if __has_include(".config/regolith/Xresources")
+#include ".config/regolith/Xresources"
+#endif
+
 Xft.antialias: true
 Xft.hinting: true
 Xft.rgba: rgb

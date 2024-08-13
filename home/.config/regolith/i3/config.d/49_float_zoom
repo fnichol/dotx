@@ -8,10 +8,10 @@
 for_window [class="zoom"] floating enable
 
 # Disable default floating for main zoom window (new meetings, join, etc)
-for_window [class="zoom" title="Zoom - Licensed Account"] floating disable
+for_window [class="zoom" title="Zoom Workplace - Licensed account"] floating disable
 
 # Disable default floating for zoom meeting windows
-for_window [class="zoom" title="Zoom Meeting"] floating disable
+for_window [class="zoom" title="Meeting"] floating disable
 
 # Set zoom notification window to floating with no focus
 for_window [title="^zoom\s?$"] floating enable
